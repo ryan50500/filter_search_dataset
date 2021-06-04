@@ -2,9 +2,9 @@ const btns = document.querySelectorAll('.btn');
 const storeProducts = document.querySelectorAll('.store-product');
 // const search = document.getElementById(search);
 
-for (i = 0; i < btns.length; i++) {
+btns.forEach(function(button) {
 
-    btns[i].addEventListener('click', (e) => {
+    button.addEventListener('click', (e) => {
         e.preventDefault()
         
         const filter = e.target.dataset.filter;
@@ -22,7 +22,7 @@ for (i = 0; i < btns.length; i++) {
             }
         });
     });
-};
+});
 
 // SEARCH FILTER
 const search = document.getElementById("search");
@@ -33,16 +33,39 @@ search.addEventListener("keyup", filterProducts);
 
 
 function filterProducts(e) {
+    searchresult = search.value;
+    console.log(searchresult);
+
     const text = e.target.value.toLowerCase();
     // console.log(productName[0]);
-    productName.forEach(function(product) {
-        const item = product.firstChild.textContent;
+
+
+
+
+    // this loop works with IE
+    for(i = 0; i < productName.length; i++) {
+        const item = productName[i].firstChild.textContent;
         if (item.toLowerCase().indexOf(text) != -1) {
-            product.parentElement.parentElement.style.display = "block"
+            productName[i].parentElement.parentElement.style.display = "block"
         } else {
-            product.parentElement.parentElement.style.display = "none"
+            productName[i].parentElement.parentElement.style.display = "none"
         }
-    })
+    }
+
+
+
+    // This loop not compatible with IE
+
+    // productName.forEach(function(product) {
+    //     const item = product.firstChild.textContent;
+    //     if (item.toLowerCase().indexOf(text) != -1) {
+    //         product.parentElement.parentElement.style.display = "block"
+    //     } else {
+    //         product.parentElement.parentElement.style.display = "none"
+    //     }
+    // })
+
+
 }
 
 
